@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<ul id="ex">
+    <!--(value,index)第一个指的是数组的值，第二个指的是数组的索引-->
+    <li v-for="cp in caipus">{{cp}}
+    <button v-on:click="del">删除</button></li>
+</ul>
+<script>
+    new Vue({
+        el:"#ex",
+        data:{
+            caipus:["凉菜","米饭","稀饭"]
+        },
+        methods:{
+            del:function(index){
+                this.caipus.splice(index,1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

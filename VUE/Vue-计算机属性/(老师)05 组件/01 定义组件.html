@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<hello-tom></hello-tom>
+		</div>
+		<script type="text/javascript">
+
+			//用Vue.extend创建一个组件构造器
+			var myComponent = Vue.extend({
+				template:"<h3>hello component</h3>"
+			})
+			
+			//创建一个组件，用创建的组件构造器来注册一个组件（方式一）
+			Vue.component("hello-tom",myComponent);
+			new Vue({
+				el:"#app"
+			})
+			
+			
+		</script>
+	</body>
+</html>

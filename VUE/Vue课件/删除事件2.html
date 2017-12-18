@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(value,index) in fruits">
+            {{value}}
+            <span v-on:click="del(index)">删除</span>
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            fruits:["苹果","香蕉","鸭梨"]
+        },
+        methods:{
+            del:function(index){
+                this.fruits.splice(index,1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<style>
+    .abc{
+        font-size: 50px;
+        color: aqua
+    }
+    </style>
+<body>
+    <div id="app">
+        <router-link to="/home">首页</router-link>
+        <router-link to="/movies">电影</router-link>
+        <router-link to="/images">图片</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var home={
+            template:`<h1>我是home页</h1>`
+        };
+        var movies={
+            template:`<h1>我是movies页</h1>`
+        };
+        var images={
+            template:`<h1>我是images页</h1>`
+        };
+        var router=new VueRouter({
+            routes:[
+                {path:"/home",component:home},
+                {path:"/movies",component:movies},
+                {path:"/images",component:images}
+            ],
+            linkActiveClass:"abc"
+        });
+    new Vue({
+        el:"#app",
+        router
+    })
+    </script>
+</body>
+</html>

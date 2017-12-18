@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/vue.js"></script>
+<div id="app">
+    <img v-bind:src="imageInfo" alt="">
+    <button v-on:click="changeImage">按钮</button>
+    <!--<button @click="changeImage">按钮</button>-->
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            imageInfo:"img/8201.jpg"
+
+            },
+        methods:{
+            changeImage:function(){
+                this.imageInfo = "img/8602.jpg"
+            }
+        }
+    })
+</script>
+</body>
+</html>

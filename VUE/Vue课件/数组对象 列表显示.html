@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(student,index) in students">
+            索引：{{index}}------
+            姓名：{{student.name}},
+            学号：{{student.num}}
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            students:[
+                {name:"张三",num:"001"},
+                {name:"李四",num:"002"},
+                {name:"王五",num:"002"}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<hello></hello>
+		</div>
+		<div id="abc">
+			<!--局部组件hello是不可以在这使用的，它只能在id为app的作用域中使用-->
+			<!--<hello></hello>-->
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:"#app",
+				data:{
+					
+				},
+				computed:{
+					
+				},
+				methods:{
+					
+				},
+				//局部组件，只可以在当前的Vue实例中使用
+				components:{
+					"hello":{
+						template:"<p>我是局部组件</p>"
+					}
+				}
+			})
+			
+			new Vue({
+				el:"#abc"
+			})
+		</script>
+	</body>
+</html>

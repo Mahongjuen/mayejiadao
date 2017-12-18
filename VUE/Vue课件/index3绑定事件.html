@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/vue.js"></script>
+<button v-on:click="massage">按钮</button>
+<script>
+    new Vue({
+        //作用域
+        el:"button",
+//        数据中心
+        data:{
+             message1:"hello vue1",
+             message2:"hello vue2"
+            },
+        //方法一
+            methods:{//在方法事件中用this.dataName获取和设置数据
+               massage:function(){
+                   alert(this.message1);
+               },
+                massage:function(){
+                    alert(this.message2);
+                }
+            }
+    })
+</script>
+</body>
+</html>

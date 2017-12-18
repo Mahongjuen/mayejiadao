@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    Vue.component("app",{
+        //父组件在使用子组件的地方监听子组件触发的事件
+        template:`
+      <btn v-on:myEvent="showData"></btn>
+        `,
+        methods:{
+            showData:function(){
+                alert("你还好吗！！！");
+            }
+        }
+    });
+    Vue.component("btn",{
+        template:`
+        <button v-on:click="send">触发</button>
+        `,
+        methods:{
+            send:function(){
+                //在子组件中用$emit（事件，数据）来触发一个事件，事件为自定义事件
+                this.$emit("myEvent");
+            }
+        }
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

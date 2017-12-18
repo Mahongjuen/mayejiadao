@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<app></app>
+		</div>
+		<script type="text/javascript">
+			var bus = new Vue();
+			Vue.component("app",{
+				template:`
+					<div>
+						<myform></myform>
+						<list></list>
+					</div>
+				`
+			})
+			Vue.component("myform",{
+				template:`
+					<form v-on:submit.prevent="add">
+						<input type="text" v-model="message"/>
+						<input type="submit" value="添加"/>
+					</form>
+				`,
+				methods:{
+					add:function(){
+						bus.$emit("addApp",this.message);
+						this.message = "";
+					}
+				},
+				data:function(){
+					return {
+						message:""
+					}
+				}
+			})
+			Vue.component("list",{
+				template:`
+					<ul>
+						<li v-for="(value,index) in fruits">
+							{{value}}
+							<button v-on:click=del(index)>删除</button>
+						</li>
+					</ul>
+				`,
+				data:function(){
+					return {
+						fruits:["香蕉","苹果","橘子"]
+					}
+				},
+				mounted:function(){
+					var s = this;
+					bus.$on("addApp",function(data){
+						s.fruits.push(data);
+					})
+				},
+				methods:{
+					del:function(index){
+						this.fruits.splice(index,1);
+					}
+				}
+			})
+			
+			new Vue({
+				el:"#app"
+			})
+		</script>
+	</body>
+</html>

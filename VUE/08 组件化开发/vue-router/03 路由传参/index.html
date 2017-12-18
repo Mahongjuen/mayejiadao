@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<style>
+    .ass{
+        font-size: 50px;
+        color: #000;
+    }
+</style>
+<body>
+<!--一.路由嵌套和传递参数
+		传参的两种方式
+		1.查询字符串：login?username=tom&password=123
+			{{$route.query}}
+		2.rest风格：regist/tom/123
+			{{$route.params}}
+			path:"regist/:username/:password"
+		-->
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/user">用户</router-link>
+    <router-view></router-view>
+</div>
+<template id="user">
+    <div>
+    <h3>用户管理</h3>
+    <ul>
+        <router-link tag="li" to="/user/login?username=tom&password=123">登录</router-link>
+        <router-link tag="li" to="/user/regist/tom/123">注册</router-link>
+    </ul>
+        <router-view></router-view>
+    </div>
+</template>
+<script>
+//    定义路由以及配置路由
+    var home={
+        template:`<h1>我是home页</h1>`
+    };
+    var user={
+        template:"#user"
+    };
+    var login={
+        template:`<h3>login页面==={{$route.query}},
+        用户名:{{$route.query.username}},
+        密码:{{$route.query.password}}</h3>`
+    };
+    var regist={
+        template:`<h3>regist页面==={{$route.params}},
+        用户名:{{$route.params.username}},
+        密码:{{$route.params.password}}</h3>`
+    };
+    var routera=new VueRouter({
+        routes:[
+            {path:"/home",component:home},
+            {path:"/user",component:user,
+            children:[
+                {path:"login",component:login},
+                {path:"regist/:username/:password",component:regist}
+            ]
+            }
+        ],
+        linkActiveClass:"ass"
+    });
+    new Vue({
+        el:"#app",
+        router:routera
+    })
+</script>
+</body>
+</html>

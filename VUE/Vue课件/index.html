@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div V-bind:title="message">111</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"div",
+        data:{
+            message:"hello world"
+        }
+    })
+</script>
+</body>
+</html>

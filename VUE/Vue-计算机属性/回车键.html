@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<input v-on:keyup.13="submit">-->
+    <!--<input v-on:keyup.enter="submit">-->
+    <!--<input v-on:click="submit">  鼠标按下的事件-->
+    <input @keyup.up="submit">
+    <input @keyup.down="submit">
+    <input @keyup.left="submit">
+    <input @keyup.right="submit">
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+            submit:function(){
+                alert("你按下了回车键")
+            }
+        }
+    })
+</script>
+</body>
+</html>

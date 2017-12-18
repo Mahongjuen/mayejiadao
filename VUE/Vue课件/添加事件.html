@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <h3>{{message}}</h3>
+
+    <!--v-model可以双向绑定数据-->
+    <input type="text" v-model="message">
+</div>
+<script>
+    new Vue({
+        el:".app",
+        data:{
+            message:"随便写点什么吧"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button onclick="fun()">开始</button>
+			<button v-on:click="change">改变</button>
+		</div>
+		<script type="text/javascript">
+			//区别：
+			//1.计算属性是基于它的依赖进行更新的，只有在相关依赖发生改变时，才能更新变化
+			//2.计算属性是有缓存的，只要相关依赖没有改变，多次访问计算属性得到的值是之前缓存的计算结果，不会多次执行
+			//3.而使用 methods ，在重新渲染的时候，函数总会重新调用执行
+			
+			var v = new Vue({
+				el:"#app",
+				data:{
+					num:100
+				},
+				computed:{
+					num2:function(){
+						console.log(new Date());
+						return this.num-1;
+					}
+				},
+				methods:{
+					getNum2:function(){
+						console.log(new Date());
+						return this.num-1;
+					},
+					change:function(){
+						this.num = 666;
+					}
+				}
+			})
+			
+			function fun(){
+				
+				setInterval(function(){
+//					console.log(v.num2);
+					console.log(v.getNum2());
+				},1000)
+			}
+		</script>
+	</body>
+</html>

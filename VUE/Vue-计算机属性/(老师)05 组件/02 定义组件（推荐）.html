@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<my-component></my-component>
+		</div>
+		
+		<script type="text/javascript">
+			//直接注册一个组件(推荐)
+			Vue.component("my-component",{
+				template:"<h3>自定义组件</h3>"
+			});
+			new Vue({
+				el:"#app"
+			})
+			
+		</script>
+	</body>
+</html>

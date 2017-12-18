@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    Vue.component("app",{
+        template:`
+        <div>
+        <tit></tit>
+        <list :message="fruit"></list>
+        </div>
+        `
+        ,
+        data:function(){
+            return{
+                fruit:[ "柚子","椰子","橘子","西瓜"]
+            }
+        }
+    });
+    Vue.component("tit",{
+        template:`
+        <h2>水果列表</h2>
+        `
+    });
+    Vue.component("list",{
+        props:["message"],
+        template:`
+        <ul>
+        <li v-for="fruit in message">{{fruit}}</li>
+        </ul>
+        `
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

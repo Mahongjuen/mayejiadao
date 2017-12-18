@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p title="我是没有绑定title属性的p标签">我是没有绑定title属性的p标签</p>
+    <p V-bind:title="message">我是绑定title属性的p标签</p>
+</div>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"div",
+        data:{
+            message:"我是绑定title属性的p标签！！！！"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<script src="../js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="col-md-6">
+			<h2>商品列表</h2>
+			<table class="table table-bordered">
+				<thead>
+					<th>商品名称</th>
+					<th>商品单价</th>
+					<th>商品数量</th>
+					<th>添加至购物车</th>
+				</thead>
+				<tbody>
+					<tr v-for="(value,index) in goodsList">
+						<td>{{value.name}}</td>
+						<td>{{value.price}}</td>
+						<td>
+							<button @click="subGoodCount(index)">-</button>
+							<span>{{value.count}}</span>
+							<!--<button @click="value.count += 1">+</button>-->
+							<button @click="addGoodCount(index)">+</button>
+						</td>
+						<td>
+							<button @click="add(index)" class="btn btn-primary">添加购物车</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<h2>购物车</h2>
+			<table class="table table-bordered">
+				<thead>
+					<th>商品名称</th>
+					<th>商品单价</th>
+					<th>商品数量</th>
+					<th>删除</th>
+				</thead>
+				<tbody>
+					<tr v-for="(cart,index) in cartList">
+						<td>{{cart.name}}</td>
+						<td>{{cart.price}}</td>
+						<td>
+							<button @click="subCartCount(index)">-</button>
+							<span>{{cart.count}}</span>
+							<button @click="addCartCount(index)">+</button>
+						</td>
+						<td>
+                			<button @click="del(index)" class="btn btn-primary">删除</button>
+           				</td>
+					</tr>
+				</tbody>
+			</table>
+			<button @click="checkout" class="btn btn-success">结账</button>
+			{{sum}}
+		</div>
+	</div>
+	
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				goodsList:[
+					{name:"苹果",price:2.5,count:0},
+					{name:"香蕉",price:2.0,count:0},
+					{name:"鸭梨",price:0.7,count:0}
+				],
+				cartList:[
+					{name:"鸭梨",price:0.7,count:0},
+					{name:"香蕉",price:2.0,count:0},
+					{name:"苹果",price:2.5,count:0}
+				]
+			},
+			computed:{
+				sum:function(){
+					var sum =0;
+					for(var i=0;i<this.cartList.length;i++){
+						var price = this.cartList[i].price;
+						var num = this.cartList[i].count;
+						sum = this.accAdd(sum,this.accMul(price,num));
+						//sum += price*num;
+					}
+					
+					//return "您总计消费 "+sum+" 元";
+					return `您总计消费了 ${sum} 元`;
+				}
+			},
+			methods:{
+				/*除法*/
+				  accDiv(arg1,arg2){ 
+					  var t1=0,t2=0,r1,r2; 
+					  try{t1=arg1.toString().split(".")[1].length;}catch(e){} 
+					  try{t2=arg2.toString().split(".")[1].length;}catch(e){} 
+					  with(Math){ 
+					  r1=Number(arg1.toString().replace(".","")); 
+					  r2=Number(arg2.toString().replace(".",""));
+					  return accMul((r1/r2),pow(10,t2-t1)); 
+					  } 
+				  }, 
+				  
+				  /*乘法*/
+				   accMul(arg1,arg2){ 
+					   var m=0,s1=arg1.toString(),s2=arg2.toString();
+					   try{m+=s1.split(".")[1].length;}catch(e){} 
+					   try{m+=s2.split(".")[1].length;}catch(e){} 
+					   return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m); 
+				   },
+				  			   
+				 /*加法 */
+				 accAdd(arg1,arg2){ 
+					 var r1,r2,m; 
+					 try{r1=arg1.toString().split(".")[1].length;}catch(e){r1=0;} 
+					 try{r2=arg2.toString().split(".")[1].length;}catch(e){r2=0;} 
+					 m=Math.pow(10,Math.max(r1,r2)); 
+					 return (arg1*m+arg2*m)/m; 
+				 }, 
+				
+				 
+				 /*减法 */
+				 Subtr(arg1,arg2){
+				     var r1,r2,m,n;
+				     try{r1=arg1.toString().split(".")[1].length;}catch(e){r1=0;}
+				     try{r2=arg2.toString().split(".")[1].length;}catch(e){r2=0;}
+				     m=Math.pow(10,Math.max(r1,r2));
+				     n=(r1>=r2)?r1:r2;
+				     return ((arg1*m-arg2*m)/m).toFixed(n);
+				 },
+				
+				
+				addGoodCount:function(i){
+					this.goodsList[i].count++;
+				},
+				addCartCount:function(i){
+					this.cartList[i].count++;
+				},
+				subGoodCount:function(index){
+					if(this.goodsList[index].count>0){
+						this.goodsList[index].count--;
+					}
+					
+				},
+				subCartCount:function(index){
+					if(this.cartList[index].count>1){
+						this.cartList[index].count--;
+					}
+				},
+				del(index){
+					this.cartList.splice(index,1);
+				},
+				clone:function(obj){
+					var newObj = {};
+					for(var i in obj){
+						newObj[i] = obj[i];
+					}
+					return newObj;
+				},
+				
+				add:function(index){
+					if(this.goodsList[index].count===0){
+						alert("亲，请输入数量");
+					}else{
+						for(var i=0;i<this.cartList.length;i++){
+							if(this.goodsList[index].name==this.cartList[i].name){
+								this.cartList[i].count +=this.goodsList[index].count;
+								this.goodsList[index].count=0;
+								return;
+							}
+						}
+						var obj = this.clone(this.goodsList[index]);
+						this.cartList.push(obj);
+						this.goodsList[index].count=0;
+					}
+					
+					/*if(this.goodsList[index].count===0){
+						alert("亲，请输入数量");
+						return;
+					}
+					
+					for(var i=0;i<this.cartList.length;i++){
+						if(this.goodsList[index].name==this.cartList[i].name){
+							this.cartList[i].count +=this.goodsList[index].count;
+							this.goodsList[index].count=0;
+							return;
+						}
+						
+					}
+					
+					var obj = this.clone(this.goodsList[index]);
+					this.cartList.push(obj);
+					this.goodsList[index].count=0;*/
+				},
+				
+				checkout(){
+					var sum =0;
+					for(var i=0;i<this.cartList.length;i++){
+						var price = this.cartList[i].price;
+						var num = this.cartList[i].count;
+						//sum = sum + price*num;
+						sum += price*num;
+					}
+					alert("您总计消费 "+sum+" 元");
+					alert(`您总计消费了 ${sum} 元`);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

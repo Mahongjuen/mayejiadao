@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<style>
+    .ass{
+        font-size: 50px;
+        color: #000;
+    }
+</style>
+<body>
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/user">用户</router-link>
+    <router-view></router-view>
+</div>
+<template id="user">
+    <div>
+    <h3>用户管理</h3>
+    <ul>
+        <router-link tag="li" to="/user/login">登录</router-link>
+        <router-link tag="li" to="/user/regist">注册</router-link>
+    </ul>
+        <router-view></router-view>
+    </div>
+</template>
+<script>
+//    定义组件
+    var home={
+        template:`<h1>我是home页</h1>`
+    };
+    var user={
+        template:"#user"
+    };
+    var login={
+        template:`<h3>login页面</h3>`
+    };
+    var regist={
+        template:`<h3>regist页面</h3>`
+    };
+    var routera=new VueRouter({
+        routes:[
+            {path:"/home",component:home},
+            {path:"/user",component:user,
+            children:[
+                {path:"login",component:login},
+                {path:"regist",component:regist}
+            ]
+            }
+        ],
+        linkActiveClass:"ass"
+    });
+    new Vue({
+        el:"#app",
+        router:routera
+    })
+</script>
+</body>
+</html>

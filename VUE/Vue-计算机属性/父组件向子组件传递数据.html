@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    //组件模板不可以向外暴露两个及以上标签
+    Vue.component("app",{
+       //通过v-bind将data中的数据绑定到父组件的tit标签中在通过message属性传递到子组件tit中
+        template:`
+        <div>
+        <tit v-bind:message="msg"></tit>
+        <list></list>
+        </div>
+        `
+        ,
+        data:function(){
+            return{
+                msg:"水果列表"
+            }
+        }
+    });
+    Vue.component("tit",{
+        props:["message"],
+        template:`
+        <h3>{{message}}</h3>
+        `
+    });
+    Vue.component("list",{
+        template:`
+        <ul>
+        <li>柚子</li>
+        <li>蜜桔</li>
+        <li>椰子</li>
+        </ul>
+        `
+    });
+    new Vue({
+        el:"app"
+    })
+</script>
+</body>
+</html>

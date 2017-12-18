@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算属性是由getter和setter组成</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{num2}}</h1>
+		</div>
+		<script type="text/javascript">
+			var v = new Vue({
+				el:"#app",
+				data:{
+					num:5
+				},
+				computed:{
+					//计算属性是由get和set组成
+					num2:{
+						get:function(){
+							return this.num+3;
+						},
+						//这里的设置值，是给num2的相关依赖设置的值
+						set:function(val){
+							this.num = val;
+						}
+					}
+				}
+			})
+			v.num2 = 666;
+		</script>
+	</body>
+</html>

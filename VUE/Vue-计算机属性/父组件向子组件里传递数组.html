@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    Vue.component("app",{
+        template:`
+        <div>
+        <tit msg="123" message="水果列表"></tit>
+        <list></list>
+        </div>
+        `
+    });
+    Vue.component("tit",{
+        //通过props接收组件传递过来的数据
+//        props:["message"],
+        props:["message","msg"],
+        template:`
+        <h2>message:{{message}},msg:{{msg}}</h2>
+        `
+    });
+    Vue.component("list",{
+        template:`
+        <ul>
+        <li>蜜桔</li>
+        <li>桃子</li>
+        <li>柚子</li>
+        </ul>
+        `
+    });
+    new Vue({
+      el:"#app"
+    })
+</script>
+</body>
+</html>

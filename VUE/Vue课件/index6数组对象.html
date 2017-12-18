@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="add">
+    <ul>
+        <li v-for="cp in caipus">
+            {{cp.liangcai}}
+            {{cp.recai}}
+            {{cp.zhushi}}
+            <button @click="del(index)">删除</button>
+        </li>
+    </ul>
+</div>
+<script>
+   var v= new Vue({
+        el:"#add",
+        data:{
+            caipus:[
+                {"liangcai":"拍黄瓜"},
+                {"liangcai":"凉拌菜"},
+                {"liangcai":"晾肉细"},
+
+                {"recai":"牛肉"},
+                {"recai":"羊肉"},
+                {"recai":"鸡肉"},
+
+                {"zhushi":"馒头"},
+                {"zhushi":"大饼"},
+                {"zhushi":"米饭"}
+            ],
+            del:function(index){
+            this.caipus.splice(index,1)
+   }
+        }
+    }) ;
+   //向数组结尾追加数组
+   v.caipus.push({'zhushi':'饼干'});
+    console.log(v.caipus);
+
+    //向数组开头追加数据
+   v.caipus.unshift({'liangcai':'sss'});
+
+   //在下标为2的地方删除1
+   v.caipus.splice(2,1,{'liangcai':'aaaaaaaa'});
+
+    console.log(v.caipuo)
+</script>
+</body>
+</html>

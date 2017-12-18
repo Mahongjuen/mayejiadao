@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{num}}</p>
+    <p>{{num2}}</p>
+
+    <p>{{getNum()}}</p>
+
+    <button onclick="change()">改变</button>
+</div>
+<script>
+    var v=new Vue({
+        el:"#app",
+        data:{
+           num:10
+            },
+        computed:{
+            num2:function(){//相关依赖发生改变时，才发生变化,num2依赖于num
+                return this.num-1;
+            }
+        },
+        methods:{
+            getNum(){
+                return this.num-1;
+            }
+        }
+
+    });
+    function change(){
+        v.num=666;
+    }
+    change()
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    Vue.component("app",{
+        template:`
+        <div>
+        <tit></tit>
+        <list v-bind:message="fruit"></list>
+        </div>
+        `
+        ,
+        data:function(){
+            return{
+                fruit:["中国","日本","美国"]
+            }
+        }
+    });
+    Vue.component("tit",{
+        template:`
+        <h1>国家</h1>
+        `
+    });
+    Vue.component("list",{
+        props:["message"],
+        template:`
+        <ul>
+        <li v-for="fruit in message">{{fruit}}</li>
+        </ul>
+        `
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

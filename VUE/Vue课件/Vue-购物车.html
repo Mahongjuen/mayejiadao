@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="col-md-5">
+        <table class="table table-bordered">
+            <h2>商品菜单</h2>
+            <tr>
+                <th>商品名称</th>
+                <th>商品单价</th>
+                <th>商品数量</th>
+                <th>添加至购物车</th>
+            </tr>
+            <tr v-for="(goods,index) in goodsList">
+                <td>{{goods.name}}</td>
+                <td>{{goods.num}}</td>
+                <td>
+                <button @click="add1(index)">-</button>
+                    <span>{{goods.count}}</span>
+                <button @click="add2(index)">+</button>
+                </td>
+                <td @click="add5(index)">添加至购物车</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <table class="table table-bordered">
+            <h2>购物车</h2>
+            <tr>
+                <th>商品名称</th>
+                <th>商品单价</th>
+                <th>商品数量</th>
+                <th>添加至购物车</th>
+            </tr>
+            <tr v-for="(cart,index) in cartList">
+                <td>{{cart.name}}</td>
+                <td>{{cart.num}}</td>
+                <td>
+                    <button @click="add3(index)">-</button>
+                    <span>{{cart.count}}</span>
+                    <button @click="add4(index)">+</button>
+                </td>
+                <td @click="del(index)"><button style="background:grey;color: #fff;">删除</button></td>
+            </tr>
+        </table>
+        <button @click="jiesua" style="background:grey;color: #fff;width: 60px;height: 30px;" >结算</button>
+    </div>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            goodsList:[
+                {name:"苹果",num:"2.5",count:"0"},
+                {name:"香蕉",num:"3.5",count:"0"},
+                {name:"椰子",num:"7.5",count:"0"}
+            ],
+            cartList:[
+
+            ]
+        },
+        methods:{
+            //给"+"号添加属性
+            add2(index){
+                this.goodsList[index].count++;
+            },
+            //给"-"号添加属性
+            add1(index){
+                if(this.goodsList[index].count>0)
+                    this.goodsList[index].count--;
+            },
+            //给"+"号添加属性
+            add4(index){
+                this.cartList[index].count++;
+            },
+            //给"-"号添加属性
+            add3(index){
+                if(this.cartList[index].count>1)
+                    this.cartList[index].count--;
+            },
+            //添加至购物车
+            add5:function(index){
+                if(this.goodsList[index].count==0){//判断商品数量不能为零
+                    alert("请输入商品的数量");
+                }else{
+                    for(var i in this.cartList){//判断商品数量不能重复
+                    if(this.goodsList[index].name==this.cartList[i].name){
+                        this.cartList[i].count=this.goodsList[index].count+this.cartList[i].count;
+                        this.goodsList[index].count=0;
+                        return false;
+                    }
+                }
+                    var NewStudents={};//空数组
+                    //循环需要克隆的对象
+                    for(var i in this.goodsList[index]){//克隆数组使其添加到列表里边
+                        //将需要克隆的对象的属性和值，赋给新对象的属性和值
+                        NewStudents[i] = this.goodsList[index][i];
+                    }
+                    this.cartList.push(NewStudents);
+                    this.goodsList[index].count=0;
+                }
+            },
+            //删除
+            del:function(index){
+                this.cartList.splice(index,1);
+            },
+            //结算
+            jiesua(){
+                var a=0;
+                for(var i in this.cartList){
+                    a +=this.cartList[i].num*this.cartList[i].count
+                }
+                alert("您当前的消费是:" +a);
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

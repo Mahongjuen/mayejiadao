@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <hello v-bind:msg="name":sex="sex":age="age"></hello>
+</div>
+<script>
+    Vue.component("hello",{
+        props:["msg","sex","age"],
+        template:`
+        <p>姓名:{{msg}},性别:{{sex}},学号:{{age}}</p>
+        `
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            name:"张三",
+            sex:"男",
+            age:"002"
+        }
+    })
+</script>
+</body>
+</html>

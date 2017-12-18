@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<my-component></my-component>
+		</div>
+		<div class="abc">
+			<my-component></my-component>
+		</div>
+		<script type="text/javascript">
+			//全局组件，可以在任何vue实例中使用
+			Vue.component("my-component",{
+				template:"<h3>nice to meet you</h3>"
+			})
+			new Vue({
+				el:"#app"
+			})
+			new Vue({
+				el:".abc"
+			})
+		</script>
+	</body>
+</html>

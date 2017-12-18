@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<app></app>
+		</div>
+		<script type="text/javascript">
+			Vue.component("app",{
+				template:`
+					<xinwen v-bind:title="title" v-bind:con="con"></xinwen>
+				`,
+				data:function(){
+					return {
+						title:"今天的新鲜事儿",
+						con:"今天的新鲜事儿你造吗？我不告诉你"
+					}
+				}
+			})
+			Vue.component("xinwen",{
+				props:["title","con"],
+				template:`
+					<div>
+						<h1>{{title}}</h1>
+						<p>{{con}}</p>
+					</div>
+				`
+			})
+				
+			new Vue({
+				el:"#app"
+			})
+		</script>
+	</body>
+</html>

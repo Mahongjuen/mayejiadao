@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <ul>
+        <li v-for="(fruits,index) in fruits"
+        v-on:click="getIndex(index)">{{fruits}}
+        <button v-on:click="del(index)">删除</button>
+        </li>
+
+    </ul>
+</div>
+    <script>
+        new Vue({
+            el:".app",
+            data:{
+              fruits:["香蕉","苹果","火龙果"]
+            },
+         methods:{
+             //方法一
+//                getIndex(num){
+//                    console.log(num);
+//                }
+             //方法二
+             getIndex:function(num){
+                 console.log(num);
+             },
+             del:function(index){
+                 this.fruits.splice(index,1)
+             }
+            }
+        })
+    </script>
+</body>
+</html>

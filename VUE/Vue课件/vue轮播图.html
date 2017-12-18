@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .pic{
+            text-align: center;
+        }
+        .pic button{
+            width: 30px;
+            height: 30px;
+            position: relative;
+            top: 20px;
+            left: -450px;
+            border-radius: 20px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+ <div id="app">
+     <div class="pic">
+     <img v-bind:src="num" >
+     <button @click="add">1</button>
+     <button @click="ass">2</button>
+     <button @click="aqq">3</button>
+     </div>
+ </div>
+ <script>
+     new Vue({
+         el:"#app",
+         data:{
+             pic:["img/8603.jpg","img/8604.jpg","img/8605.jpg"],
+             i:0,
+             num:"img/8603.jpg"
+         },
+       mounted:function(){
+           this.num=this.pic[0];
+           var a=this;
+           setInterval(function(){
+               a.i++;
+               a.num=a.pic[a.i];
+               if(a.i>=a.pic.length-1){
+                   a.i=0;
+               }
+           },2000);
+
+       },
+         methods:{
+             add:function(){
+                 this.num="img/8603.jpg"
+             },
+             ass:function(){
+                 this.num="img/8604.jpg"
+             },
+             aqq:function(){
+                 this.num="img/8605.jpg"
+             }
+
+         }
+     })
+ </script>
+</body>
+</html>

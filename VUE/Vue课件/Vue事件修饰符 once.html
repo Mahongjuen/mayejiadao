@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--事件修饰符.noce,表示事件只执行一次-->
+<button @click.once="hello">按钮</button>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+        hello:function(){
+            alert("您好");
+        }
+    }
+    })
+</script>
+</body>
+</html>

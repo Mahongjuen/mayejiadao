@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <Script src="js/vue.js"></Script>
+</head>
+<body>
+<div id="app">
+    <hello></hello>
+    {{msg}}
+    <hello-son></hello-son>
+</div>
+<script>
+    Vue.component("hello",{
+        template:"<p>我是{{msg}}全局组件</p>",
+        //data必须是函数的形式，函数必须又返回值，而且返回值是对象
+        data:function(){
+            return{
+                msg:"hello component",
+                msg2:"hi",
+                msg3:"hhhhh"
+
+            }
+        }
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"hello vae"
+        },
+        components:{
+           "hello-son":{
+               template:"<p>我是{{msg}}局部组件</p>",
+               data:function(){
+                   return{
+                       msg:"hello son"
+                   }
+               }
+           }
+        }
+    });
+</script>
+</body>
+</html>

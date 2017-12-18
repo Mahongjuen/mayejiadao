@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+<script>
+    var bus=new Vue();
+    Vue.component("app",{
+        template:`
+        <div>
+        <A></A>
+        <B></B>
+        </div>
+        `
+    });
+    Vue.component("A",{
+        template:`
+        <h3>A组件{{message}},{{num}},{{arr}}</h3>
+        `,
+        data:function(){
+           return{
+               message:"(我是A组件)",
+               num:[],
+               arr:0
+           }
+        },
+        mounted:function(){
+            var self=this;//vue实例对象(当前组件)先保存一份
+            bus.$on("myEvent",function(data,data1,data2){
+                alert(data);
+                self.message=data;
+                self.num=data1;
+                self.arr=data2;
+            })
+        }
+    });
+    Vue.component("B",{
+        template:`
+        <div>
+        <h3>B组件{{msg}}</h3>
+        <button v-on:click="send">改变组件A的文本</button>
+        </div>
+        `,
+        data:function(){
+            return{
+                msg:"(B组件的数据)",
+                msg1:["张三","李四","王五"],
+                msg2:2500
+            }
+        },
+        methods:{
+            send:function(){
+                bus.$emit("myEvent",this.msg,this.msg1,this.msg2)
+            }
+        }
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

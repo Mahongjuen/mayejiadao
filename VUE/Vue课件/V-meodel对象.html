@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    姓名：<input type="text" v-model="studnet.name"><p></p>
+    年龄：<input type="text" v-model="studnet.age"><p></p>
+    性别：<input type="text" v-model="studnet.sex"><p></p>
+
+    <h3>姓名：{{studnet.name}}</h3>
+    <h3>性别：{{studnet.age}}</h3>
+    <h3>年龄：{{studnet.sex}}</h3>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            studnet:{
+                name:"张三",
+                age:"12",
+                sex:"男"
+            }
+        }
+    })
+</script>
+</body>
+</html>
